@@ -1,0 +1,36 @@
+<% if !@error.nil? %>
+<div id="error">
+	<%= @error %>
+</div>
+<% end %>
+<% if @code == 1 %>
+	<%= erb :sign_in %>
+<% else %>
+<div id="form">
+	<form id="create_list" action="/create_list" method="post">
+		<input type="hidden" name="access_token" value="<%= @access_token %>">
+		<input type="hidden" name="secret" value="<%= @secret %>">
+
+		<div class="row">
+			<div class="label">Twitter Username</div>
+			<div class="input">
+				<div>
+					<input type="text" id="screen_name" name="screen_name" 
+					placeholder="<%= ["Jack", "biz", "ev", "dickc", "maxvoltar", "ollymoss", "elonmusk", "ElectricObjects", "daniel_rehn"].sample %>"
+					required pattern="\w{0,15}" title="Can contain letters, numbers, and underscores"></div>
+				<div>
+					<button id="submit" type="submit">Create List</button></div>
+			</div>
+		</div>
+	</form>
+	<div class="loading" id="progress">
+		Generating list. Please wait, this may take up to two minutes<span class="elipsis">...</span>
+	</div>
+</div>
+<% end %>
+<script>
+document.getElementById("create_list").addEventListener("submit", function(){
+	document.getElementById("submit").disabled = true
+	document.getElementById("form").style.maxHeight = "200px"
+})
+</script>
