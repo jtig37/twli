@@ -1,8 +1,10 @@
 require "sinatra"
+require "dotenv/load"  # This will automatically load the variables from .env
+
 configure do
-  set :twitter_consumer_key, "5dFsI2iBEe1AhJ6BFJqZrcKlC"
-  set :twitter_consumer_secret, "YZxggBKSy6uN5VRJCtoiRLBQHJql9IUIQllozvgyk34yN9CeXz"
-  set :cookie_secret, "AAAAAAAAAAAAAAAAAAAAAJSovwEAAAAAr4C2FT%2FsKz5nx84gd309e3cg16g%3DJjvgzc0G4ptVVbRLfccj6rmfAXkwzKTBEWrHKE5aNBE9dxW1Rm"
+  set :twitter_consumer_key, ENV['TWITTER_CONSUMER_KEY']
+  set :twitter_consumer_secret, ENV['TWITTER_CONSUMER_SECRET']
+  set :cookie_secret, ENV['COOKIE_SECRET']
 end
 
 require "./app"
